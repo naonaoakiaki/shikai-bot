@@ -1,0 +1,1 @@
+INSERT INTO user(name, birthday, deleted) VALUES('naopon', '20160101', '0');
