@@ -1,0 +1,62 @@
+@startuml
+
+actor User
+
+== GET ==
+activate User
+User -> Controller : Request today speaker
+note right : GET /get
+activate Controller
+Controller -> Service
+activate Service
+Service -> Dao
+activate Dao
+database shikai
+Dao -> shikai : Speech回数が少なく1番年上の\nUSER_NAMEをSELECT
+shikai -> Dao : USER_NAME
+deactivate Dao
+Dao -> Service
+Service -> Controller : ユーザ名とget,done,skipのendpoint
+deactivate Service
+deactivate Controller
+Controller -> User
+
+== DONE ==
+User -> User : Speech
+User -> Controller : Request speech done
+note right : POST /done?user_id=001
+activate Controller
+Controller -> Service
+activate Service
+Service -> Dao
+activate Dao
+Dao -> shikai : 話した日付をINSERT
+deactivate Dao
+Dao -> Service
+deactivate Service
+Service -> Controller
+deactivate Controller
+Controller -> User : OK
+deactivate User
+
+== SKIP ==
+User -> Controller : Request speaker skip
+note right : POST /skip?user_id=001
+activate Controller
+Controller -> Service
+activate Service
+Service -> Dao
+activate Dao
+database shikai
+Dao -> shikai : Speech回数が少なく1番年上かつ\n指定したUSER_ID以外の\nUSER_NAMEをSELECT
+shikai -> Dao : USER_NAME
+deactivate Dao
+Dao -> Service
+Service -> Controller : ユーザ名とget,done,skipのendpoint
+deactivate Service
+deactivate Controller
+note over User, Controller
+     bug:2回連続skipされた場合
+     はじめのGET時のユーザと同じ
+end note
+@enduml
