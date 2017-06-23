@@ -24,7 +24,7 @@ Controller -> User
 == DONE ==
 User -> User : Speech
 User -> Controller : Request speech done
-note right : POST /done?user_id=001
+note right : GET /done?userName=naopon
 activate Controller
 Controller -> Service
 activate Service
@@ -41,7 +41,7 @@ deactivate User
 
 == SKIP ==
 User -> Controller : Request speaker skip
-note right : POST /skip?user_id=001
+note right : GET /skip?userName=naopon
 activate Controller
 Controller -> Service
 activate Service
