@@ -13,7 +13,12 @@ import java.util.List;
 @Mapper
 public interface SpeechMapper {
     //ユーザごとのspeech数
-    @Select("SELECT USER_ID, count(*) as count FROM SPEECH GROUP BY USER_ID")
+    @Select("SELECT u.USER_ID, c.count FROM USER as u " +
+            "JOIN ( " +
+            "  SELECT USER_ID, count(*) as count " +
+            "  FROM SPEECH " +
+            "  GROUP BY USER_ID " +
+            ") as c ON u.USER_ID = c.USER_ID")
     List<Speech> selectAll();
 
 }

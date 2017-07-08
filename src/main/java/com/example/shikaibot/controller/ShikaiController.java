@@ -39,7 +39,7 @@ public class ShikaiController {
         return users;
     }
 
-    @GetMapping(value = "/getSpeech")
+    @GetMapping(value = "/getSpeechs")
     public List<Speech> getSpeechs() {
         List<Speech> speechs = speechMapper.selectAll();
         log.info(speechs.toString());
