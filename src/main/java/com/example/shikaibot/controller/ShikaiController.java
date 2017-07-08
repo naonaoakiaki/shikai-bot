@@ -4,6 +4,7 @@ import com.example.shikaibot.dao.SpeechMapper;
 import com.example.shikaibot.dao.UserMapper;
 import com.example.shikaibot.entity.Speech;
 import com.example.shikaibot.entity.User;
+import com.example.shikaibot.service.SpeechService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,12 @@ public class ShikaiController {
     @Autowired
     private SpeechMapper speechMapper;
 
+    @Autowired
+    private SpeechService speechService;
+
     @GetMapping(value = "/get")
     public String getSpeaker() {
-        User user = userMapper.select("naopon");
-        return user.toString();
+        return speechService.getTodayShikai();
     }
 
     @GetMapping(value = "/getAll")

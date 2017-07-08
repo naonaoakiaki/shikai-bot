@@ -15,6 +15,9 @@ public interface UserMapper {
     @Select("SELECT USER_ID, NAME, BIRTHDAY, DELETED FROM USER WHERE NAME = #{name}")
     User select(String name);
 
+    @Select("SELECT USER_ID, NAME, BIRTHDAY, DELETED FROM USER WHERE USER_ID = #{user_id}")
+    User getUserName(String user_id);
+
     @Select("SELECT USER_ID, NAME, BIRTHDAY, DELETED FROM USER")
     List<User> selectAll();
 }

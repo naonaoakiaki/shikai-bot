@@ -20,5 +20,4 @@ public interface SpeechMapper {
             "  GROUP BY USER_ID " +
             ") as c ON u.USER_ID = c.USER_ID")
     List<Speech> selectAll();
-
 }
