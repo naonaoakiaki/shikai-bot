@@ -28,9 +28,9 @@ public class SlackService {
 
     public HttpStatus postSlack(String name) {
         RestTemplate restTemplate = new RestTemplate();
-        String message = messageBuilder(shikaiProperties.getUri(), name);
+        String message = messageBuilder(shikaiProperties.getUrl(), name);
         SlackPayload slackPayload = new SlackPayload("#shikai_bot", "webhookbot", message, ":ghost:");
-        RequestEntity<SlackPayload> requestEntity = RequestEntity.post(slackProperties.getUri()).body(slackPayload);
+        RequestEntity<SlackPayload> requestEntity = RequestEntity.post(slackProperties.getUrl()).body(slackPayload);
         ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
         return responseEntity.getStatusCode();
     }

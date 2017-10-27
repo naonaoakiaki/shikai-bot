@@ -13,5 +13,5 @@ import java.net.URI;
 @ConfigurationProperties(prefix="shikai")
 @Data
 public class ShikaiProperties {
-    private String uri;
+    private String url;
 }

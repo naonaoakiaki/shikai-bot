@@ -13,5 +13,5 @@ import java.net.URI;
 @ConfigurationProperties(prefix="slack")
 @Data
 public class SlackProperties {
-    private URI uri;
+    private URI url;
 }
