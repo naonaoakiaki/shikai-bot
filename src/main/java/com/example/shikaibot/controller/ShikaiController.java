@@ -52,6 +52,7 @@ public class ShikaiController {
     @GetMapping(value = "/done")
     public HttpStatus doneSpeech(String userName) {
         log.info(userName);
+        speechService.doneTodayShikai(userName);
         return HttpStatus.OK;
     }
 
