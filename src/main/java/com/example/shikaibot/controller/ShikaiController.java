@@ -4,11 +4,13 @@ import com.example.shikaibot.dao.SpeechMapper;
 import com.example.shikaibot.dao.UserMapper;
 import com.example.shikaibot.entity.Speech;
 import com.example.shikaibot.entity.User;
+import com.example.shikaibot.service.SlackService;
 import com.example.shikaibot.service.SpeechService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,9 +33,13 @@ public class ShikaiController {
     @Autowired
     private SpeechService speechService;
 
+    @Autowired
+    private SlackService slackService;
+
     @GetMapping(value = "/get")
-    public String getSpeaker() {
-        return speechService.getTodayShikai();
+    public HttpStatus getSpeaker() {
+         slackService.postSlack(speechService.getTodayShikai());
+         return HttpStatus.OK;
     }
 
     @GetMapping(value = "/getAll")
